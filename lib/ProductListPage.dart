@@ -4,12 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductListPage extends StatelessWidget {
   @override
@@ -43,7 +42,6 @@ class _ProductPageState extends State<ProductPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await readJson();
-      // print("_index_index"+_index.length)
     });
   }
 
@@ -116,6 +114,8 @@ class _ProductPageState extends State<ProductPage> {
       Expanded(
         child: GridView.count(
           crossAxisCount: countValue,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
           childAspectRatio: (aspectWidth / aspectHeight),
           children: _index
               .map((data) => GestureDetector(
@@ -123,7 +123,7 @@ class _ProductPageState extends State<ProductPage> {
                   child:Column(
                     children: [
                       Expanded(
-                        flex: 20,
+                        flex: 25,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(1),
                           child: InkWell(
@@ -167,21 +167,90 @@ class _ProductPageState extends State<ProductPage> {
                           ),
                         ),
                       ),
+            /*   Card(
+                    margin: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Container(
+                      margin: const EdgeInsets.all(8),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(_items[data]["small_image"]["url"].toString()),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                              child: Text(
+                                _items[data]["name"].toString(),
+                                textAlign: TextAlign.start,
+                                style: new TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14.0,
+                                  color: Color(0xff000000),
+                                ),
+                              ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),*/
+                     /* Expanded(
+                        flex: 25,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(1),
+                          child: InkWell(
+                            onTap: () {},
+                            child: GridTile(
+                              child: Image.network(
+                                _items[data]["small_image"]["url"].toString(),
+                                fit: BoxFit.fill,
+                              ),
+                              footer: Container(
+                                child: Padding(
+                                  padding:
+                                  const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    textAlign: TextAlign.end,
+                                    _items[data]["price_range"]["maximum_price"]["discount"]["percent_off"].toString()+"%",
+                                    style: TextStyle(
+                                      backgroundColor:
+                                      Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.red,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 7,
+                        child: Text(
+                          _items[data]["name"].toString(),
+                          textAlign: TextAlign.start,
+                          style: new TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14.0,
+                            color: Color(0xff000000),
+                          ),
+                        ),
+                      ),*/
                       ],
                   ),
-                  /*Container(
-                      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                      color: Colors.lightBlueAccent,
-                      child: Center(
-                          child: Text(_items[data]["name"],
-                              //data,
-                              style:
-                              TextStyle(fontSize: 22, color: Colors.white),
-                              textAlign: TextAlign.center))
-                  )*/
           )).toList(),
         ),
       ),
     ]));
   }
+
 }
